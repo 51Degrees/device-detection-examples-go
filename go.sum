@@ -1,2 +1,8 @@
-github.com/51Degrees/device-detection-go/v4 v4.4.21 h1:vqOtgKeT2AHPgEOwQkD1CvGcVguGGjx0oMSFzWuwaQg=
-github.com/51Degrees/device-detection-go/v4 v4.4.21/go.mod h1:dbdG1fySqdY+a5pUnZ0/G0eD03G6H3Vh8kRC+1f9qSc=
+github.com/51Degrees/device-detection-go/v4 v4.4.22 h1:ffAhVggA6wy6MPdKm9Dn33SqAQfFfn+seAosFEKrzw4=
+github.com/51Degrees/device-detection-go/v4 v4.4.22/go.mod h1:8wRsvOGeUoxUwMXF4Kxrz+MDR4O/ciYsOKFFXsGbjrU=
+github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nosvA=
+github.com/fsnotify/fsnotify v1.7.0/go.mod h1:40Bi/Hjc2AVfZrqy+aj+yEI+/bRxZnMJyTJwOpGvigM=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+golang.org/x/sys v0.20.0 h1:Od9JTbYCk261bKm4M/mw7AklTlFYIa0bIp9BgSm1S8Y=
+golang.org/x/sys v0.20.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
