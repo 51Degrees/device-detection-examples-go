@@ -37,7 +37,6 @@ func main() {
 		func(params common.ExampleParams) error {
 			//Create on-premise engine
 			engine, err := onpremise.New(
-
 				// Path to your data file
 				onpremise.WithDataFile(params.DataFile),
 
@@ -80,6 +79,9 @@ func main() {
 
 				// Custom logger implementing LogWriter interface can be passed
 				// onpremise.WithCustomLogger()
+
+				// Set properties for checking, default is [] = all properties
+				// onpremise.WithProperties([]string{}),
 			)
 
 			if err != nil {
@@ -89,14 +91,14 @@ func main() {
 			defer engine.Stop()
 
 			//process before file has been updated
-			processExampleEvidence(engine, common.ExampleEvidence1)
-			processExampleEvidence(engine, common.ExampleEvidence2)
+			processExampleEvidence(engine, common.ExampleEvidenceDesktop)
+			processExampleEvidence(engine, common.ExampleEvidenceMobile)
 
 			<-time.After(20 * time.Second)
 
 			//process again after the file has presumably been updated
-			processExampleEvidence(engine, common.ExampleEvidence1)
-			processExampleEvidence(engine, common.ExampleEvidence2)
+			processExampleEvidence(engine, common.ExampleEvidenceDesktop)
+			processExampleEvidence(engine, common.ExampleEvidenceMobile)
 
 			return nil
 		},

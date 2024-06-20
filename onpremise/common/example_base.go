@@ -45,7 +45,7 @@ func RunExample(exampleFunc ExampleFunc) {
 	}
 }
 
-var ExampleEvidence1 = []onpremise.Evidence{
+var ExampleEvidenceDesktop = []onpremise.Evidence{
 	{Prefix: dd.HttpHeaderString, Key: "Sec-Ch-Ua", Value: "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\""},
 	{Prefix: dd.HttpHeaderString, Key: "Sec-Ch-Ua-Full-Version-List", Value: "\"Chromium\";v=\"124.0.6367.208\", \"Google Chrome\";v=\"124.0.6367.208\", \"Not-A.Brand\";v=\"99.0.0.0\""},
 	{Prefix: dd.HttpHeaderString, Key: "Sec-Ch-Ua-Mobile", Value: "?0"},
@@ -54,8 +54,12 @@ var ExampleEvidence1 = []onpremise.Evidence{
 	{Prefix: dd.HttpHeaderString, Key: "User-Agent", Value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"},
 }
 
-var ExampleEvidence2 = []onpremise.Evidence{
-	{Prefix: dd.HttpHeaderString, Key: "User-Agent", Value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"},
+var ExampleEvidenceMobile = []onpremise.Evidence{
+	{Prefix: dd.HttpHeaderString, Key: "User-Agent", Value: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1.2 Mobile/15E148 Safari/604.1"},
+}
+
+var ExampleEvidenceMediaHub = []onpremise.Evidence{
+	{Prefix: dd.HttpHeaderString, Key: "User-Agent", Value: "Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; A464BG Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36"},
 }
 
 func ConvertToEvidence(values map[string]string) []onpremise.Evidence {
@@ -78,4 +82,13 @@ func ConvertToEvidence(values map[string]string) []onpremise.Evidence {
 			})
 	}
 	return evidence
+}
+
+func GetEvidenceUserAgent(evidence []onpremise.Evidence) string {
+	for i := range evidence {
+		if evidence[i].Key == "User-Agent" {
+			return evidence[i].Value
+		}
+	}
+	return ""
 }

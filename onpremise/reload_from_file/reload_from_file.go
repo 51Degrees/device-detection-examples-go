@@ -46,12 +46,12 @@ func generateHash(str string) uint32 {
 }
 
 func executeTest(
-	pl *onpremise.Engine,
+	engine *onpremise.Engine,
 	wg *sync.WaitGroup,
 	evidence []onpremise.Evidence,
 	rep *freport,
 	iteration uint32) {
-	results, err := pl.Process(evidence)
+	results, err := engine.Process(evidence)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -82,7 +82,7 @@ func executeTest(
 // hash value. If the hash values are different, it indicates that Evidence Records
 // might have not been processed correctly in some iterations.
 func performDetectionIterations(
-	pl *onpremise.Engine,
+	engine *onpremise.Engine,
 	evidenceFilePath string,
 	wg *sync.WaitGroup,
 	rep *freport) {
@@ -117,7 +117,7 @@ func performDetectionIterations(
 			evidence := common.ConvertToEvidence(doc)
 
 			go executeTest(
-				pl,
+				engine,
 				wg,
 				evidence,
 				rep,
@@ -128,7 +128,7 @@ func performDetectionIterations(
 }
 
 func runReloadFromFileSub(
-	pl *onpremise.Engine,
+	engine *onpremise.Engine,
 	evidenceFilePath string, dataFilePath string) string {
 	reloads := 0
 	reloadFails := 0
@@ -142,7 +142,7 @@ func runReloadFromFileSub(
 
 	// Perform detections
 	wg.Add(1)
-	go performDetectionIterations(pl, evidenceFilePath, &wg, &rep)
+	go performDetectionIterations(engine, evidenceFilePath, &wg, &rep)
 
 	// Perform reload from file until all Evidence Records have been processed
 	for rep.evidenceProcessed < rep.evidenceCount {
@@ -190,7 +190,7 @@ func main() {
 			config.SetUpdateMatchedUserAgent(false)
 
 			//Create on-premise engine
-			pl, err := onpremise.New(
+			engine, err := onpremise.New(
 				// Detecting only IsMobile property
 				onpremise.WithProperties([]string{"IsMobile"}),
 				// Optimized config provided
@@ -208,11 +208,23 @@ func main() {
 			}
 
 			//Process evidence
-			runReloadFromFileSub(pl, params.EvidenceYaml, params.DataFile)
+			runReloadFromFileSub(engine, params.EvidenceYaml, params.DataFile)
 
-			pl.Stop()
+			engine.Stop()
 
 			return nil
 		},
 	)
 }
+
+// The output log of this example is in for the following format:
+//
+// 2021/11/10 11:42:05 Reloaded '2' times.
+// 2021/11/10 11:42:05 Failed to reload '0' times.
+// 2021/11/10 11:42:05 Hashcode '4217895257' for iteration '0'.
+// 2021/11/10 11:42:05 Hashcode '4217895257' for iteration '1'.
+// 2021/11/10 11:42:05 Hashcode '4217895257' for iteration '2'.
+// 2021/11/10 11:42:05 Hashcode '4217895257' for iteration '3'.
+
+// Output:
+// Program execution complete.

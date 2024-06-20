@@ -23,7 +23,7 @@ LICENSE_KEY=my_license_key go run onpremise/update_polling_interval.go
 #### Create engine
 ```go
     e, err := New(
-                config,
+                WithConfigHash(config),
                 WithDataUpdateUrl("datafileUrl.com/myFile.gz"),
 				WithDataFile("51Degrees-LiteV4.1.hash"),
          )
@@ -64,7 +64,16 @@ browser, err := resultsHash.ValuesString("BrowserName", ",")
 
 ### Options
 
-#### WithDataUpdateUrl Provides existing datafile
+#### WithConfigHash sets config for hash matching algorithm
+default is Balanced profile
+* Possible config profiles are: Default, LowMemory, BalancedTemp, Balanced, HighPerformance, InMemory
+
+```go
+    WithConfigHash(configHash *dd.ConfigHash) EngineOptions
+```
+
+#### WithDataFile Provides existing datafile
+##### required option
 * path - path to the datafile
 ```go
     WithDataFile(path string) EngineOptions
@@ -139,6 +148,13 @@ this is useful when 3rd party updates the data file on file system
 
 ```go
     WithTempDataCopy(enabled bool) EngineOptions
+```
+
+#### WithProperties sets which properties are gonna be checked
+default is an empty array (all properties will be checked)
+
+```go
+    WithProperties(properties []string) EngineOptions
 ```
 
 #### SetTempDataDir sets the directory to store the temp data file

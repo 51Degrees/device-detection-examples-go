@@ -80,14 +80,14 @@ type report struct {
 
 // Perform device detection on a Evidence Record
 func matchEvidenceRecord(
-	pl *onpremise.Engine,
+	engine *onpremise.Engine,
 	wg *sync.WaitGroup,
 	evidence []onpremise.Evidence,
 	rep *report) {
 	// Increase the number of Evidence Record being processed
 	atomic.AddUint64(&rep.evidenceProcessed, 1)
 
-	results, err := pl.Process(evidence)
+	results, err := engine.Process(evidence)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -114,7 +114,7 @@ func matchEvidenceRecord(
 // file. Iterate through the Evidence file and perform detection on each
 // Evidence. Record the processing time and update a report statistic.
 func performDetections(
-	pl *onpremise.Engine,
+	engine *onpremise.Engine,
 	params common.ExampleParams,
 	rep *report) {
 	// Create a wait group
@@ -133,7 +133,7 @@ func performDetections(
 			rep.evidenceCount += 1
 
 			go matchEvidenceRecord(
-				pl,
+				engine,
 				&wg,
 				evidence,
 				rep)
@@ -242,7 +242,7 @@ func main() {
 			config.SetUpdateMatchedUserAgent(false)
 
 			//Create on-premise engine
-			pl, err := onpremise.New(
+			engine, err := onpremise.New(
 				// A single property detection
 				onpremise.WithProperties([]string{"IsMobile"}),
 				// Optimized config provided
@@ -259,7 +259,7 @@ func main() {
 
 			// Action
 			actReport := report{0, 0, 0, 0}
-			performDetections(pl, params, &actReport)
+			performDetections(engine, params, &actReport)
 			// Validation to make sure same number of Evidences have been read and processed
 			if actReport.evidenceCount != actReport.evidenceProcessed {
 				log.Fatalln("ERROR: Not all Evidence Records have been processed.")
@@ -268,9 +268,21 @@ func main() {
 			// Print the final performance report
 			printReport(&actReport, "")
 
-			pl.Stop()
+			engine.Stop()
 
 			return nil
 		},
 	)
 }
+
+// The performance is output to a file 'performance_report.log' with content
+// similar as below:
+//   Average 0.01510 ms per Evidence Record
+// 	 Average 416.02 detections per second
+//   Total Evidence Records: 20000
+//   IsMobile Evidence Records: 14527
+//   Processed Evidence Records: 20000
+//   Number of CPUs: 2
+
+// Output:
+// Output report to file "performance_report.log".
