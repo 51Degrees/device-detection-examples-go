@@ -214,7 +214,7 @@ func printReport(actR *report, logOutputPath string) {
 	msPerRecord := float64(actR.processingTime) / float64(actR.evidenceCount)
 	_, err = fmt.Fprintf(w, "Average %.5f ms per Evidence Record\n", msPerRecord)
 	checkWriteError(err)
-	detectionsPerSecond := float64(actR.evidenceCount) / float64(actR.processingTime)
+	detectionsPerSecond := float64(actR.evidenceCount) * 1000 / float64(actR.processingTime)
 	_, err = fmt.Fprintf(w, "Average %.2f detections per second\n", detectionsPerSecond)
 	checkWriteError(err)
 	_, err = fmt.Fprintf(w, "Total Evidence Records: %d\n", actR.evidenceCount)
