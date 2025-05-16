@@ -1,23 +1,23 @@
 [
   {
-    "Name": "Ubuntu_Go_1.20",
+    "Name": "Ubuntu_Go_1.24",
     "Image": "ubuntu-latest",
     "Language": "go",
-    "LanguageVersion": "1.20",
+    "LanguageVersion": "1.24",
     "PackageRequirement": true
   },
   {
-    "Name": "Windows_Go_1.20",
+    "Name": "Windows_Go_1.24",
     "Image": "windows-latest",
     "Language": "go",
-    "LanguageVersion": "1.20",
+    "LanguageVersion": "1.24",
     "PackageRequirement": true
   },
   {
-    "Name": "macOS_Go_1.20",
+    "Name": "macOS_Go_1.24",
     "Image": "macos-latest",
     "Language": "go",
-    "LanguageVersion": "1.20",
+    "LanguageVersion": "1.24",
     "PackageRequirement": true
   }
 ]
