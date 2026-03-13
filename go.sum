@@ -1,7 +1,7 @@
 github.com/51Degrees/common-go/v4 v4.5.0 h1:AAt6fY4H30ZIpIh1cT7/wO3rH29HRnl5An8R6bFbK+I=
 github.com/51Degrees/common-go/v4 v4.5.0/go.mod h1:+siIyLfHfsLmpLJ4svhllQD8zDfKFRtqBAVCAWYI6jI=
-github.com/51Degrees/device-detection-go/v4 v4.5.7 h1:MkdM9epBn9l2kyGAGmNSnI9fAysgUbDJO2dh60C4Sjs=
-github.com/51Degrees/device-detection-go/v4 v4.5.7/go.mod h1:6SqGM4RmkDTBysYXmxNASFnLuYByQ//up0Z2blcAq4I=
+github.com/51Degrees/device-detection-go/v4 v4.5.8 h1:cLVrNSxngXcVQSnOtfJb6Mc3i6V7Epq1rvn3ALX5YLQ=
+github.com/51Degrees/device-detection-go/v4 v4.5.8/go.mod h1:6SqGM4RmkDTBysYXmxNASFnLuYByQ//up0Z2blcAq4I=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
